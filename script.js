@@ -198,17 +198,24 @@ async function getCountries(countries) {
 //     console.log(countryName);
 // });
 
-fetch(apiURL)
-    .then(response => {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response.json();
-    })
-    .then(res => {
-        getCountries(res);
-        console.log(res);
-    })
-    .catch(err => {
-        console.log(err);
-    })
+async function getMyData() {
+   let data = await fetch(apiURL);
+   let myRes = await data.json();
+   getCountries(myRes);
+}
+getMyData();
+
+// fetch(apiURL)
+//     .then(response => {
+//         if (!response.ok) {
+//             throw Error(response.statusText);
+//         }
+//         return response.json();
+//     })
+//     .then(res => {
+//         getCountries(res);
+//         console.log(res);
+//     })
+//     .catch(err => {
+//         console.log(err);
+//     })
