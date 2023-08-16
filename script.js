@@ -10,7 +10,7 @@ let countryContainer = document.querySelector(".view-country");
 
 const apiURL = `https://restcountries.com/v3.1/all`;
 
-async function getCountries(countries) {
+function getCountries(countries) {
     countries.forEach(country => {
 
         let countryCard = document.createElement('div');
