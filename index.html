@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <link rel="stylesheet" href="styles.css">
+    <title>Countries App</title>
+</head>
+
+<body>
+    <header>
+        <h3 class="title">Where in the world?</h3>
+        <div class="toggle-mode">Dark Mode</div>
+    </header>
+    <div class="search-option">
+        <div>
+            <input type="text" id="searchInput" class="search-box" placeholder="Search for a country" />
+            <button>Search</button>
+        </div>
+        <select name="" id="region" class="filter-by">
+            <option value="">Filter by Region</option>
+            <option value="africa">Africa</option>
+            <option value="america">America</option>
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+            <option value="oceania">Oceania</option>
+        </select>
+    </div>
+    <div class="search-info"></div>
+
+
+    <div class="countries-container"></div>
+    <div class="view-country"></div>
+    <div class="view-region"></div>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
