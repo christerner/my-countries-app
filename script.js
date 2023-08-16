@@ -10,28 +10,29 @@ let countryContainer = document.querySelector(".view-country");
 
 const apiURL = `https://restcountries.com/v3.1/all`;
 
-function getCountries(countries) {
-    countries.forEach(country => {
+async function getCountries() {
+    let data = await fetch(apiURL);
+   let myRes = await data.json();
 
         let countryCard = document.createElement('div');
         countryCard.classList.add('info-details');
         countryCard.innerHTML =
             `  
-                    <img src="${country.flags.png}" alt="Country flag" class="flag-container" style="width: 220px; height: 120px;">
-                        <div class="country-name">${country.name.common}</div>
+                    <img src="${myRes[0].flags.png}" alt="Country flag" class="flag-container" style="width: 220px; height: 120px;">
+                        <div class="country-name">${myRes[0].name.common}</div>
                    
                         <div class="more-info">
                             <div class="info">
                                 <label for="">Population: </label>
-                                <div class="population">${country.population}</div>
+                                <div class="population">${myRes[0].population}</div>
                             </div>
                             <div class="info">
                                 <label for="">Region: </label>
-                                <div class="region">${country.region}</div>
+                                <div class="region">${myRes[0].region}</div>
                             </div>
                             <div class="info">
                                 <label for="">Capital: </label>
-                                <div class="capital">${country.capital}</div>
+                                <div class="capital">${myRes[0].capital}</div>
                             </div>
                         </div>  
                 
@@ -86,8 +87,10 @@ function getCountries(countries) {
     // `
     //         countryContainer.appendChild(viewCountry);
     //     })
-    });
+    
 }
+
+getCountries();
 // Search for a country
 // async function getData(country) {
 //     const apiURL = `https://restcountries.com/v3.1/name/${country}?fullText=true`;
@@ -197,14 +200,6 @@ function getCountries(countries) {
 //     getData(countryName)
 //     console.log(countryName);
 // });
-
-async function getMyData() {
-   let data = await fetch(apiURL);
-   let myRes = await data.json();
-   getCountries(myRes);
-}
-getMyData();
-
 // fetch(apiURL)
 //     .then(response => {
 //         if (!response.ok) {
