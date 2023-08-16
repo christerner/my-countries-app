@@ -198,7 +198,7 @@ async function getCountries(countries) {
 //     console.log(countryName);
 // });
 
-window.onload = fetch(apiURL)
+fetch(apiURL)
     .then(response => {
         if (!response.ok) {
             throw Error(response.statusText);
