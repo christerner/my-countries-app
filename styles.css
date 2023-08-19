@@ -1,19 +1,26 @@
-/* * {
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-} */
+}
 
 header {
     display: flex;
     justify-content: space-between;
-    /* margin: 18px 24px;     */
+    align-items: center;  
+    margin: 12px 8px;  
+}
+.top {
+    background-color: gray;
+    position: sticky;
+    top: 0;
+    padding: 2px;
 }
 
 .search-option {
     display: flex;
     justify-content: space-evenly;
-    margin: 0 68px;  
+    margin: 24px 68px;
 }
 .search-box {
     width: max-content;
@@ -46,20 +53,63 @@ button {
 .countries-container {
     display: flex;
     justify-content: center;
-    align-items: center;    
-    /* flex-wrap: wrap;
-    margin: 12px 0; */
+    align-items: center;
+    gap: 20px;   
+    flex-wrap: wrap;
+    margin: 24px 0;
+}
+.country-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    text-align: justify;
+}
+.loading {
+    font-size: 24px;
+    color: red;
+}
+
+.view-region {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 img {    
-    margin-bottom: 12px;
+    width: 300px;
+    height: 200px;    
     object-fit: cover;
+    margin-bottom: 8px;
 }
 .country-name {
-    font-size: 20px;
+    
     font-weight: bolder;
-
+    margin-bottom: 8px;
 }
+
+p {
+    margin: 6px 0;
+}
+.back-btn {
+    width: 160px;
+    font-size: 24px;
+}
+.back-btn:hover {
+    background-color: cadetblue;
+    cursor: pointer;
+}
+.error-message {
+    font-size: 24px;
+    color: red;
+    text-align: center;
+    margin-top: 12px;
+}
+
 
 .info-details {
     display: flex;
@@ -82,4 +132,17 @@ img {
     width: 120px;
     font-size: large;
     align-self: center;
+}
+
+footer {
+    width: 100vw;
+    height: 24px;
+    background-color: gray;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+   
 }

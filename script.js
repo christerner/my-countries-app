@@ -1,216 +1,103 @@
-let searchBtn = document.querySelector("button");
-let searchBox = document.querySelector(".search-box");
-let filter = document.querySelector("#region");
-let viewRegion = document.querySelector(".view-region");
+let containerAll = document.querySelector(".countries-container");
+let viewCountry = document.querySelector(".view-country");
+let loading = document.querySelector(".loading");
+let byRegion = document.querySelector("#region")
+let search = document.querySelector(".search-box");
+let displayByRegion = document.querySelector(".view-region");
+let errorMsg = document.querySelector(".error-message");
 
-let warning = document.querySelector(".search-info");
+const apiURL = "https://restcountries.com/v3.1/";
 
-let countriesContainer = document.querySelector(".countries-container");
-let countryContainer = document.querySelector(".view-country");
+// fetch all countries
+async function fetchCountries() {
+    let response = await fetch(apiURL + "all");
+    let data = await response.json();
 
-const apiURL = `https://restcountries.com/v3.1/all`;
+    let display = "";
 
-async function getCountries() {
-    let data = await fetch(apiURL);
-   let myRes = await data.json();
+    data.forEach(country => {
 
-        let countryCard = document.createElement('div');
-        countryCard.classList.add('info-details');
-        countryCard.innerHTML =
-            `  
-                    <img src="${myRes[0].flags.png}" alt="Country flag" class="flag-container" style="width: 220px; height: 120px;">
-                        <div class="country-name">${myRes[0].name.common}</div>
-                   
-                        <div class="more-info">
-                            <div class="info">
-                                <label for="">Population: </label>
-                                <div class="population">${myRes[0].population}</div>
-                            </div>
-                            <div class="info">
-                                <label for="">Region: </label>
-                                <div class="region">${myRes[0].region}</div>
-                            </div>
-                            <div class="info">
-                                <label for="">Capital: </label>
-                                <div class="capital">${myRes[0].capital}</div>
-                            </div>
-                        </div>  
-                
-            `
-        countriesContainer.appendChild(countryCard);
-
-
-        // Create view single country       
-
-    //     countryCard.addEventListener("click", () => {
-
-    //         countriesContainer.style.display = "none";
-    //         document.querySelector(".search-option").style.display = "none"
-    //         let viewCountry = document.createElement('div');
-    //         viewCountry.classList.add('info-details');
-    //         viewCountry.innerHTML =
-    //             `  
-    //         <img src="${country.flags.png}" alt="Country flag" class="flag-container" style="width: 440px; height: 240px;">
-    //             <div class="country-name">${country.name.common}</div>
-           
-    //             <div class="more-info">
-    //                 <div class="info">
-    //                     <label for="">Population: </label>
-    //                     <div class="population">${country.population}</div>
-    //                 </div>
-    //                 <div class="info">
-    //                     <label for="">Region: </label>
-    //                     <div class="region">${country.region}</div>
-    //                 </div>
-    //                 <div class="info">
-    //                     <label for="">Subregion: </label>
-    //                     <div class="region">${country.subregion}</div>
-    //                 </div>
-    //                 <div class="info">
-    //                     <label for="">Capital: </label>
-    //                     <div class="capital">${country.capital}</div>
-    //                 </div>
-    //                 <div class="info">
-    //                     <label for="">Languages: </label>
-    //                     <div class="capital">${Object.values(country.languages).toString().split(",").join(", ")}</div>
-    //                 </div>
-    //                 <div class="info">
-    //                     <label for="">Currencies: </label>
-    //                     <div class="capital">${country.currencies[Object.keys(country.currencies)].name +
-    //             ", " + Object.keys(country.currencies)[0]}</div>
-    //                 </div>
-                    
-    //             </div>
-    //             <a href="index.html">  
-    //             <button class="back">Back</button> 
-    //             </a>    
-    // `
-    //         countryContainer.appendChild(viewCountry);
-    //     })
-    
+        display += `<div class="country-card">
+        <img src=${country.flags.svg} alt="${country.name.common}">
+        <h4 class="">${country.name.common}</h4>
+        <p class="region">Region: ${country.region}</p>
+        <p class="capital">Capital: ${country.capital}</p>
+        <p class="population">Population: ${country.population}</p>
+    </div>`
+    })
+    containerAll.innerHTML = display;
 }
 
-getCountries();
-// Search for a country
-// async function getData(country) {
-//     const apiURL = `https://restcountries.com/v3.1/name/${country}?fullText=true`;
-
-//     if (searchBox.value == "") {
-//         warning.innerHTML = "Please enter country name";
-
-//     }
-//     else {
-//         try {
-//             countriesContainer.style.display = "none";
-//             warning.innerHTML = "<img src = './img/loading.gif'/>";
-
-//             let response = await fetch(apiURL);
-//             let country = await response.json();
-//             warning.innerHTML = "";
-//             document.querySelector(".search-option").style.display = "none"
-//             let viewCountry = document.createElement('div');
-//             viewCountry.classList.add('info-details');
-//             viewCountry.innerHTML =
-//                 `  
-//             <img src="${country[0].flags.png}" alt="Country flag" class="flag-container" style="width: 440px; height: 240px;">
-//                 <div class="country-name">${country[0].name.common}</div>
-           
-//                 <div class="more-info">
-//                     <div class="info">
-//                         <label for="">Population: </label>
-//                         <div class="population">${country[0].population}</div>
-//                     </div>
-//                     <div class="info">
-//                         <label for="">Region: </label>
-//                         <div class="region">${country[0].region}</div>
-//                     </div>
-//                     <div class="info">
-//                         <label for="">Subregion: </label>
-//                         <div class="region">${country[0].subregion}</div>
-//                     </div>
-//                     <div class="info">
-//                         <label for="">Capital: </label>
-//                         <div class="capital">${country[0].capital}</div>
-//                     </div>
-//                     <div class="info">
-//                         <label for="">Languages: </label>
-//                         <div class="capital">${Object.values(country[0].languages).toString().split(",").join(", ")}</div>
-//                     </div>
-//                     <div class="info">
-//                         <label for="">Currencies: </label>
-//                         <div class="capital">${country[0].currencies[Object.keys(country[0].currencies)].name +
-//                 ", " + Object.keys(country[0].currencies)[0]}</div>
-//                     </div>
-                    
-//                 </div>   
-//                 <a href="index.html">  
-//                 <button class="back">Back</button> 
-//                 </a>     
-//     `
-//             countryContainer.appendChild(viewCountry);
-            
-//         } catch (error) {
-//             warning.innerHTML = "Data not found"
-//             countriesContainer.style.display = "flex";
-
-//         }
-//     }
-// }
+fetchCountries();
 
 // Filter by region
+async function filterByRegion(region) {
+    let response = await fetch(apiURL + `region/${region}`);
+    let data = await response.json(); 
 
-// async function getFiltered(region) {
-//     let results = await fetch(`https://restcountries.com/v3.1/region/${region}`);
-//     let data = await results.json();    
-//     console.log(data);
+    let display = "";
 
-//     let countryCard = document.createElement('div');
-//     countriesContainer.style.display ="none";
-//     countryContainer.style.display ="none";
-//         countryCard.classList.add('info-details');
-//         countryCard.innerHTML =
-//             `  
-//                     <img src="${data.flag}" alt="Country flag" class="flag-container" style="width: 220px; height: 120px;">
-//                         <div class="country-name">${data.name}</div>
-                   
-//                         <div class="more-info">
-//                             <div class="info">
-//                                 <label for="">Population: </label>
-//                                 <div class="population">${data.population}</div>
-//                             </div>
-//                             <div class="info">
-//                                 <label for="">Region: </label>
-//                                 <div class="region">${data.region}</div>
-//                             </div>
-//                             <div class="info">
-//                                 <label for="">Capital: </label>
-//                                 <div class="capital">${data.capital}</div>
-//                             </div>
-//                         </div>  
-                
-//             `
-//         viewRegion.appendChild(countryCard);
-// }
-// filter.addEventListener("click", () => {
-//     getFiltered(filter.value)
-// })
+    data.forEach(country => {
 
-// searchBtn.addEventListener("click", () => {
-//     let countryName = document.querySelector("input").value;
-//     getData(countryName)
-//     console.log(countryName);
-// });
-// fetch(apiURL)
-//     .then(response => {
-//         if (!response.ok) {
-//             throw Error(response.statusText);
-//         }
-//         return response.json();
-//     })
-//     .then(res => {
-//         getCountries(res);
-//         console.log(res);
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     })
+        display += `<div class="country-card">
+        <img src=${country.flags.svg} alt="${country.name.common}">
+        <h4 class="">${country.name.common}</h4>
+        <p class="region">Region: ${country.region}</p>
+        <p class="capital">Capital: ${country.capital}</p>
+        <p class="population">Population: ${country.population}</p>
+    </div>`
+    })
+
+    containerAll.innerHTML = display;
+}
+
+byRegion.addEventListener("click", () => {
+    let query = byRegion.value;
+
+    filterByRegion(query)
+})
+
+// search for a country
+async function searchCountry(query) {  
+    if(searchBtn.value == 0) {
+        errorMsg.innerHTML = "Please enter country name"
+     } 
+
+    let response = await fetch(apiURL + `name/${query}`);
+    let data = await response.json();
+    if(data.length < 1)   errorMsg.innerHTML = "No data"
+    console.log(data)     
+    errorMsg.innerHTML = "" 
+    searchBtn.value = "";    
+
+    let display = "";
+     
+        display += `<div class="country-card">
+            <img src=${data[0].flags.svg} alt="${data[0].name.common}">
+            <h4 class="">${data[0].name.common}</h4>
+            <p class="region">Region: ${data[0].region}</p>
+            <p class="capital">Capital: ${data[0].capital}</p>
+            <p class="population">Population: ${data[0].population}</p>  
+            <a href="index.html"><button class="back-btn">Back</button></a>          
+        </div>`
+    
+    containerAll.innerHTML = display;
+    
+
+
+
+    // console.log(data[0].subregion)
+    // console.log(data[0].capital)
+    // console.log(data[0].population)
+}
+let searchBtn = document.querySelector("button");
+searchBtn.addEventListener("click", () => {
+    
+    errorMsg.innerHTML = ""
+    let value = search.value;
+    //console.log(value)
+    searchCountry(value);
+   
+    
+    
+})
