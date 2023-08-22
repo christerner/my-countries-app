@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <meta http-equiv="pragma" content="no-cache">
-    <link rel="stylesheet" href="styles.css">
-    <title>Countries App</title>
-</head>
-
-<body>
-    <div class="top">
-        <header>
-            <h3 class="title">Where in the world?</h3>
-            <div class="toggle-mode">Dark Mode</div>
-        </header>
-        <div class="search-option">
-            <div>
-                <input type="text" id="searchInput" class="search-box" placeholder="Search for a country" />
-                <button>Search</button>
-            </div>
-            <select name="" id="region" class="filter-by">
-                <option value="" selected disabled>Filter by Region</option>
-                <option value="africa">Africa</option>
-                <option value="america">America</option>
-                <option value="asia">Asia</option>
-                <option value="europe">Europe</option>
-                <option value="oceania">Oceania</option>
-            </select>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countries</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link 
+      href="https://fonts.googleapis.com/css?family=Nunito:300,regular,500,600,700,800"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="header-content">
+        <h2 class="title"><a href="/">Where in the world?</a></h2>
+        <p class="theme-changer"><i class="fa-regular fa-moon"></i>&nbsp;&nbsp;Dark Mode</p>
+      </div>
+    </header>
+    <main>
+      <div class="search-filter-container">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search for a country...">
         </div>
-    </div>
-    
-    <div class="error-message"></div>
-    <div class="loading"></div>
-
-    <div class="countries-container">
-        <div class="country-card"></div>
-    </div>
-
-    <div class="view-country font"></div>
-    <div class="view-region"></div>
-
-    <footer>
-        2023 - By Chris
-    </footer>
-
-    <script src="/script.js"></script>
-</body>
-
+        <select class="filter-by-region">
+          <option hidden>Filter by Region</option>
+          <option value="Africa">Africa</option>
+          <option value="America">America</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
+        </select>
+      </div>
+      <div class="countries-container"></div>
+    </main>
+  </body>
 </html>
