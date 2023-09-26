@@ -142,7 +142,7 @@ a {
     background-color: var(--elements-color);
     color: var(--text-color);
 }
-
+/*  */
 @media(max-width: 768px) {
     .countries-container {
         justify-content: center;
